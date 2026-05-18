@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For You</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div id="page-gate" class="page active">
+    <div class="particles" id="particles"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="gate-center">
+      <div class="gate-icon">✦</div>
+      <h1 class="gate-title">
+        <span class="line-1">Falling</span>
+        <span class="line-2">behind</span>
+      </h1>
+      <p class="gate-clue">
+        <span class="clue-label">— hint —</span><br/>
+        Three-letter slang people type<br/>when completely shocked.<br/>
+        <em>All caps. No spaces.</em>
+      </p>
+      <div class="password-wrapper">
+        <input type="password" id="password-input" class="password-input"
+          placeholder="enter the secret…" maxlength="10" autocomplete="off"/>
+        <div class="input-line"></div>
+        <div class="input-glow"></div>
+      </div>
+      <button class="gate-btn" id="gate-btn">
+        <span>Open</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+      <p class="gate-error" id="gate-error">That's not the key. Try again.</p>
+    </div>
+
+    <div class="corner corner-tl">✦ ✦ ✦</div>
+    <div class="corner corner-tr">✦ ✦ ✦</div>
+    <div class="corner corner-bl">✦ ✦ ✦</div>
+    <div class="corner corner-br">✦ ✦ ✦</div>
+  </div>
+
+  <canvas id="transition-canvas"></canvas>
+
+  <div id="page-letter" class="page">
+
+    <canvas id="petals-canvas"></canvas>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="music-player" id="music-player">
+      <audio id="bg-audio" loop>
+        <!-- REPLACE "song.mp3" with your actual audio filename -->
+        <source src="firstfrost.mp3" type="audio/mpeg"/>
+      </audio>
+      <div class="music-disc" id="music-disc">
+        <div class="disc-inner">♪</div>
+      </div>
+      <div class="music-info">
+        <span class="music-title">Yearning</span>
+        <span class="music-sub">playing ♡</span>
+      </div>
+      <button class="music-btn" id="music-toggle" title="Play / Pause">
+        <svg class="icon-play"  viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <div class="music-bars">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="letter-scene">
+      <div class="deco-panel deco-left">
+        <div class="deco-vine">
+          <svg viewBox="0 0 100 700" xmlns="http://www.w3.org/2000/svg" class="vine-svg">
+            <path class="vine-path"
+              d="M50 0 Q25 60 50 120 Q75 180 50 240 Q25 300 50 360 Q75 420 50 480 Q25 540 50 600 Q75 660 50 700"
+              stroke="currentColor" fill="none" stroke-width="1.8" opacity="0.5"
+              stroke-dasharray="900" stroke-dashoffset="900"/>
+            <ellipse cx="32" cy="90"  rx="14" ry="7" fill="currentColor" opacity=".22" transform="rotate(-35 32 90)"/>
+            <ellipse cx="68" cy="180" rx="14" ry="7" fill="currentColor" opacity=".22" transform="rotate(35 68 180)"/>
+            <ellipse cx="32" cy="270" rx="16" ry="8" fill="currentColor" opacity=".22" transform="rotate(-30 32 270)"/>
+            <ellipse cx="68" cy="360" rx="14" ry="7" fill="currentColor" opacity=".22" transform="rotate(35 68 360)"/>
+            <ellipse cx="32" cy="450" rx="16" ry="8" fill="currentColor" opacity=".22" transform="rotate(-30 32 450)"/>
+            <ellipse cx="68" cy="540" rx="14" ry="7" fill="currentColor" opacity=".22" transform="rotate(35 68 540)"/>
+          </svg>
+        </div>
+        <div class="deco-flowers">
+          <div class="flower flower-1">✿</div>
+          <div class="flower flower-2">❀</div>
+          <div class="flower flower-3">✾</div>
+          <div class="flower flower-4">✿</div>
+          <div class="flower flower-5">❋</div>
+          <div class="flower flower-6">❀</div>
+        </div>
+        <div class="side-butterflies">
+          <div class="butterfly b-l-1">🦋</div>
+          <div class="butterfly b-l-2">🦋</div>
+        </div>
+      </div>
+
+      <div class="letter-container">
+        <div class="letter-paper" id="letter-paper">
+          <div class="paper-texture"></div>
+
+          <!-- Wax seal -->
+          <div class="wax-seal"><div class="seal-circle">✦</div></div>
+
+          <!-- Ribbon -->
+          <div class="ribbon-banner">
+            <div class="ribbon-side ribbon-left-side"></div>
+            <span class="ribbon-text">✿ &nbsp; 你好 &nbsp; ✿</span>
+            <div class="ribbon-side ribbon-right-side"></div>
+          </div>
+
+          <div class="letter-ornament-top">
+            <div class="ornament-line"></div>
+            <span class="ornament-symbol">✦ ❧ ✦</span>
+            <div class="ornament-line"></div>
+          </div>
+
+          <div class="letter-header">
+            <p class="letter-date">2026</p>
+            <h2 class="letter-salutation">Hellowww</h2>
+          </div>
+
+          <div class="letter-body">
+            <p class="reveal-p">
+              I’ve actually been thinking for quite a while about whether I should give you this letter or not. In the end, I decided to just do it before I overthink everything again. I don’t really expect anything from this letter honestly, but I think there are some things I’ve wanted to say, at least for myself.
+            </p>
+
+            <div class="inline-deco">— ✦ —</div>
+
+            <p class="reveal-p">
+              I just want to thank you for every little impact you brought into my life, even if you probably never realized it. Somehow, just seeing you around could make an ordinary day feel a bit better. It’s funny because we never really talked much, and I never had the courage to properly tell you how I felt either. Maybe because deep down, I already knew nothing would probably happen anyway, so I just kept everything to myself.
+            </p>
+
+            <p class="reveal-p">
+             But strangely, I don’t regret it. I think some people come into our lives not to become “something,” but just to leave good memories behind, and I’m honestly grateful for that. Even from a distance, you became a small part of my life that I’ll probably remember for a long time.
+            </p>
+
+            <div class="pressed-flower-deco">
+              <span class="pf pf-1">✿</span>
+              <span class="pf pf-2">❀</span>
+              <span class="pf pf-3">✾</span>
+              <span class="pf pf-4">❀</span>
+              <span class="pf pf-5">✿</span>
+            </div>
+
+            <div class="inline-deco">— ✦ —</div>
+
+            <p class="reveal-p">
+              Giving you this letter feels a little embarrassing ngl, but also relieving at the same time. At least now I won’t keep wondering “what if I said something?” years later like some dramatic coming-of-age movie character. Humans love doing that to themselves for some reason.
+            </p>
+
+            <p class="reveal-p">
+              Anyway, I genuinely wish nothing but good things for you. Good luck with your uni preparation!!!! future can feel scary and exciting at the same time, but I hope everything goes well for you and that you end up somewhere that makes you happy.
+            </p>
+          </div>
+
+          <div class="letter-closing">
+            <p class="closing-text">Anonymous,</p>
+            <p class="closing-signature">— ✦ —</p>
+            <div class="closing-hearts">
+              <span class="hrt hrt-1">♡</span>
+              <span class="hrt hrt-2">♡</span>
+              <span class="hrt hrt-3">♡</span>
+            </div>
+          </div>
+
+          <!-- Reply Form -->
+<div class="reply-section">
+  <div class="reply-ornament">
+    <span>✦</span>
+  </div>
+
+  <h3 class="reply-title">anything you want to say?</h3>
+
+  <p class="reply-sub">
+  if you want to leave a comment you can
+  text here
+  </p>
+
+  <form
+    class="reply-form"
+    action="https://formspree.io/f/mkoenkna"
+    method="POST"
+  >
+    <textarea
+      name="message"
+      placeholder="write something here..."
+      required
+    ></textarea>
+
+    <button type="submit" class="reply-btn">
+      send ✦
+    </button>
+
+    <a href="reply.html" class="hidden-reply-link">
+  click here to see my reply
+</a>
+  </form>
+</div>
+
+          <div class="letter-ornament-bottom">
+            <div class="ornament-line"></div>
+            <span class="ornament-symbol">✾ ❦ ✾</span>
+            <div class="ornament-line"></div>
+          </div>
+
+          <div class="stamp stamp-tl">✿</div>
+          <div class="stamp stamp-tr">✿</div>
+          <div class="stamp stamp-bl">✾</div>
+          <div class="stamp stamp-br">✾</div>
+        </div>
+      </div>
+
+      <div class="deco-panel deco-right">
+        <div class="deco-vine">
+          <svg viewBox="0 0 100 700" xmlns="http://www.w3.org/2000/svg" class="vine-svg" style="transform:scaleX(-1)">
+            <path class="vine-path"
+              d="M50 0 Q25 60 50 120 Q75 180 50 240 Q25 300 50 360 Q75 420 50 480 Q25 540 50 600 Q75 660 50 700"
+              stroke="currentColor" fill="none" stroke-width="1.8" opacity="0.5"
+              stroke-dasharray="900" stroke-dashoffset="900"/>
+            <ellipse cx="32" cy="90"  rx="14" ry="7" fill="currentColor" opacity=".22" transform="rotate(-35 32 90)"/>
+            <ellipse cx="68" cy="180" rx="14" ry="7" fill="currentColor" opacity=".22" transform="rotate(35 68 180)"/>
+            <ellipse cx="32" cy="270" rx="16" ry="8" fill="currentColor" opacity=".22" transform="rotate(-30 32 270)"/>
+            <ellipse cx="68" cy="360" rx="14" ry="7" fill="currentColor" opacity=".22" transform="rotate(35 68 360)"/>
+            <ellipse cx="32" cy="450" rx="16" ry="8" fill="currentColor" opacity=".22" transform="rotate(-30 32 450)"/>
+            <ellipse cx="68" cy="540" rx="14" ry="7" fill="currentColor" opacity=".22" transform="rotate(35 68 540)"/>
+          </svg>
+        </div>
+        <div class="deco-flowers">
+          <div class="flower flower-1">❀</div>
+          <div class="flower flower-2">✿</div>
+          <div class="flower flower-3">❋</div>
+          <div class="flower flower-4">✾</div>
+          <div class="flower flower-5">✿</div>
+          <div class="flower flower-6">✾</div>
+        </div>
+        <div class="side-butterflies">
+          <div class="butterfly b-r-1">🦋</div>
+          <div class="butterfly b-r-2">🦋</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sparkle-layer" id="sparkle-layer"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
