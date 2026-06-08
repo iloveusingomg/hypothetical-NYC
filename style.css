@@ -887,3 +887,38 @@ html, body {
   transform: translateY(-2px);
   box-shadow: 0 10px 24px rgba(200,151,58,.2);
 }
+
+.memory-date{
+    display:inline-block;
+    margin-bottom:20px;
+
+    padding:8px 18px;
+
+    border:1px solid rgba(200,151,58,.4);
+    border-radius:999px;
+
+    background:rgba(200,151,58,.08);
+
+    color:#8a6a2b;
+
+    font-family:'DM Mono', monospace;
+    letter-spacing:.25em;
+
+    text-decoration:none;
+
+    transition:.3s ease;
+}
+
+.memory-date:hover{
+    transform:translateY(-2px);
+    background:rgba(200,151,58,.15);
+    box-shadow:0 4px 15px rgba(200,151,58,.15);
+}
+
+.tiny-note{
+    font-size:.85rem;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    opacity:.55;
+    margin-bottom:10px;
+}
